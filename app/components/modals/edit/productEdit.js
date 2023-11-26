@@ -42,8 +42,8 @@ export default function ProductEdit ({ status, setStatus, details, setDetails, l
             await axios.post('/api/product/update', details)
             .then(res=>{
                 setStatus(false)
-                Swal.fire(res.data.message)
                 load()
+                Swal.fire(res.data.message)
             })
             .catch(err=>{
                 console.log(err)
@@ -136,11 +136,22 @@ export default function ProductEdit ({ status, setStatus, details, setDetails, l
                                 />
                             </div>
                             <div className="w-full rounded-lg border border-gray-400 p-1 focus-within:text-indigo-400 focus-within:border-indigo-400">
+                                <label htmlFor="product_type" className="text-xs font-bold w-full block">Capital</label>
+                                <input 
+                                    type="number"
+                                    id="capital"
+                                    className="w-full outline-none text-gray-800 text-sm"
+                                    name="capital"
+                                    onChange={handleForm}
+                                    value={details?.capital}
+                                />
+                            </div>
+                            <div className="w-full rounded-lg border border-gray-400 p-1 focus-within:text-indigo-400 focus-within:border-indigo-400">
                                 <label htmlFor="description" className="text-xs font-bold w-full block">Description</label>
                                 <textarea 
                                     type="text"
                                     id="description"
-                                    rows={7}
+                                    rows={4}
                                     className="w-full outline-none resize-none text-gray-800 text-sm"
                                     name="description"
                                     onChange={handleForm}

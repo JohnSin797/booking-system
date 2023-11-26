@@ -18,7 +18,9 @@ export default function PackageCard ({ source, name, price, packageItem }) {
     const [bookingForm, setBookingForm] = useState({
         location: '',
         date: '',
-        message: ''
+        message: '',
+        quantity: 0,
+        services: ''
     })
     const [averageStar, setAverageStar] = useState(null)
 
@@ -78,7 +80,9 @@ export default function PackageCard ({ source, name, price, packageItem }) {
                 user_id: user.id,
                 message: bookingForm.message,
                 location: bookingForm.location,
-                date: bookingForm.date
+                date: bookingForm.date,
+                quantity: bookingForm.quantity,
+                services: bookingForm.services
             })
             .then(res=>{
                 cancel()
@@ -112,7 +116,7 @@ export default function PackageCard ({ source, name, price, packageItem }) {
                         <AiOutlineClose className="w-5 h-5 hover:text-red-600" />
                     </button>
                     <div className="w-full flex gap-2 items-center">
-                        <div className="relative w-full md:w-1/2 h-56">
+                        <div className="relative w-full md:w-1/2 h-80">
                             <Image 
                                 src={`data:image/jpg;image/jpeg;image/png;base64, ${source}`}
                                 alt="package-image"
@@ -123,7 +127,7 @@ export default function PackageCard ({ source, name, price, packageItem }) {
                             <div>
                                 <label className="text-xs font-bold">Date</label>
                                 <input 
-                                    type="date"
+                                    type="datetime-local"
                                     className="w-full p-1 border border-slate-900 rounded-lg"
                                     name="date"
                                     onChange={handleBookingForm}
@@ -139,6 +143,29 @@ export default function PackageCard ({ source, name, price, packageItem }) {
                                     onChange={handleBookingForm}
                                     value={bookingForm.location}
                                 />
+                            </div>
+                            <div>
+                                <label className="text-xs font-bold">Quantity</label>
+                                <input 
+                                    type="number"
+                                    className="w-full p-1 border border-slate-900 rounded-lg"
+                                    name="quantity"
+                                    onChange={handleBookingForm}
+                                    value={bookingForm.quantity}
+                                />
+                            </div>
+                            <div>
+                                <label className="text-xs font-bold">Services</label>
+                                <select
+                                    className="w-full p-1 border border-slate-900 rounded-lg"
+                                    name="services"
+                                    onChange={handleBookingForm}
+                                    value={bookingForm.services}
+                                >
+                                    <option>Select Services</option>
+                                    <option value={'home surprise'}>Home Surprise</option>
+                                    <option value={'car surprise'}>Car Surprise</option>
+                                </select>
                             </div>
                             <div>
                                 <label className="text-xs font-bold">Message (Optional)</label>

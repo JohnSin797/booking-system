@@ -1,6 +1,7 @@
 'use client';
 
 import DateFrame from "@/app/components/dateFrame";
+import DateTimeFrame from "@/app/components/datetimeFrame";
 import AdminNav from "@/app/components/navigation/adminNav";
 import AdminTopNav from "@/app/components/navigation/adminTopNav";
 import { csrf } from "@/app/hooks/csrf";
@@ -153,7 +154,7 @@ export default function Booking () {
                                                     <td className="p-2 border border-slate-900">
                                                         <p className="flex gap-2">
                                                             <span className="text-gray-400 text-sm">Scheduled:</span>
-                                                            <span className="text-sm text-teal-400"><DateFrame dateStr={item?.order_date} /></span>
+                                                            <span className="text-sm text-teal-400"><DateTimeFrame dateStr={item?.order_date} /></span>
                                                         </p>
                                                         <p className="flex gap-2">
                                                             <span className="text-gray-400 text-sm">Location:</span>

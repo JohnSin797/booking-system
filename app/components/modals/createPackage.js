@@ -19,7 +19,9 @@ export default function CreatePackage ({ status, setStatus, load }) {
         product_id: [],
         status: 'active',
         image: '',
-        description: ''
+        description: '',
+        capital: 0,
+        service: 0
     })
     const [types, setTypes] = useState([])
     const [products, setProducts] = useState([])

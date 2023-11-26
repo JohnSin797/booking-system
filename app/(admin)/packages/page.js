@@ -11,6 +11,7 @@ import axios from "@/app/lib/axios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb"
+import Swal from "sweetalert2";
 
 export default function Packages () {
 
@@ -48,21 +49,61 @@ export default function Packages () {
         setIsViewOpen(true)
     }
 
+    const confirmDelete = id => {
+        Swal.fire({
+            title: 'Delete',
+            icon: 'warning',
+            text: 'Are you sure you want to delete Package?',
+            showCancelButton: true,
+            showConfirmButton: true
+        })
+        .then(res=>{
+            if (res.isConfirmed) {
+                deletePackage(id)
+            }
+        })
+    }
+
+    const deletePackage = async (id) => {
+        try {
+            await csrf()
+            await axios.post('/api/package/delete', {id: id})
+            .then(res=>{
+                getData()
+                Swal.fire(res.data.message)
+            })
+            .catch(err=>{
+                console.log(err)
+                Swal.fire(err.response.data.message)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <>
             <AdminTopNav />
             <AdminNav />
             <main className="absolute w-full md:w-4/5 top-24 right-0 p-6">
-                <CreatePackage status={isOpenModal} setStatus={setIsOpenModal} load={getData} />
+                {/* <CreatePackage status={isOpenModal} setStatus={setIsOpenModal} load={getData} /> */}
                 <ViewPackage status={isViewOpen} setStatus={setIsViewOpen} details={viewDetails} />
                 <section className="flex justify-between items-center">
                     <p className="text-3xl font-bold">Packages</p>
-                    <button
-                        className="p-1 w-1/5 text-white bg-teal-400 hover:bg-teal-400/80"
-                        onClick={()=>setIsOpenModal(true)}
-                    >
-                        Add new
-                    </button>
+                    <div className="flex justify-end items-center gap-2 w-full">
+                        <Link
+                            href={'/packages/archive'}
+                            className="block bg-rose-400 hover:bg-rose-400/80 text-center text-white p-1 w-full md:w-1/5"
+                        >
+                            archive
+                        </Link>
+                        <Link
+                            className="block text-center p-1 w-full md:w-1/5 text-white bg-teal-400 hover:bg-teal-400/80"
+                            href={'/packages/create'}
+                        >
+                            Add new
+                        </Link>
+                    </div>
                 </section>
                 <section className="w-full rounded-lg shadow-md border border-slate-900 p-6 mt-10">
                     <div className="w-full h-96 overflow-y-scroll relative">
@@ -109,6 +150,7 @@ export default function Packages () {
                                                             edit
                                                         </Link>
                                                         <button
+                                                            onClick={()=>confirmDelete(item.id)}
                                                             className="w-full p-2 bg-rose-600 hover:bg-rose-700 rounded-lg"
                                                         >
                                                             delete

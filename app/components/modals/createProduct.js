@@ -7,7 +7,7 @@ import axios from "@/app/lib/axios"
 import Swal from "sweetalert2"
 import { csrf } from "@/app/hooks/csrf"
 
-export default function CreateProduct ({ status, setStatus }) {
+export default function CreateProduct ({ status, setStatus, load }) {
 
     const [productForm, setProductForm] = useState({
         name: '',
@@ -16,7 +16,8 @@ export default function CreateProduct ({ status, setStatus }) {
         price: 0,
         quantity: 0,
         status: 'active',
-        description: ''
+        description: '',
+        capital: 0
     })
     const [imagePreview, setImagePreview] = useState('')
 
@@ -56,7 +57,8 @@ export default function CreateProduct ({ status, setStatus }) {
             price: 0,
             quantity: 0,
             status: 'active',
-            description: ''
+            description: '',
+            capital: 0
         })
         setStatus(false)
     }
@@ -71,7 +73,8 @@ export default function CreateProduct ({ status, setStatus }) {
                 quantity: productForm.quantity,
                 status: productForm.status,
                 description: productForm.description,
-                image: productForm.image
+                image: productForm.image,
+                capital: productForm.capital
             })
             .then(res=>{
                 setProductForm({
@@ -81,9 +84,12 @@ export default function CreateProduct ({ status, setStatus }) {
                     price: 0,
                     quantity: 0,
                     status: 'active',
-                    description: ''
+                    description: '',
+                    capital: 0
                 })
                 setImagePreview('')
+                load()
+                setStatus(false)
                 Swal.fire(res.data.message)
             })
             .catch(err=>{
@@ -170,11 +176,22 @@ export default function CreateProduct ({ status, setStatus }) {
                                 />
                             </div>
                             <div className="w-full rounded-lg border border-gray-400 p-1 focus-within:text-indigo-400 focus-within:border-indigo-400">
+                                <label htmlFor="product_type" className="text-xs font-bold w-full block">Capital</label>
+                                <input 
+                                    type="text"
+                                    id="capital"
+                                    className="w-full outline-none text-gray-800 text-sm"
+                                    name="capital"
+                                    onChange={handleForm}
+                                    value={productForm.capital}
+                                />
+                            </div>
+                            <div className="w-full rounded-lg border border-gray-400 p-1 focus-within:text-indigo-400 focus-within:border-indigo-400">
                                 <label htmlFor="description" className="text-xs font-bold w-full block">Description</label>
                                 <textarea 
                                     type="text"
                                     id="description"
-                                    rows={7}
+                                    rows={5}
                                     className="w-full outline-none resize-none text-gray-800 text-sm"
                                     name="description"
                                     onChange={handleForm}

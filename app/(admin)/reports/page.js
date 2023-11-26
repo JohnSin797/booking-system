@@ -47,9 +47,9 @@ export default function Reports ()
 
     const exportFile = () => {
         Swal.fire({
-            title: 'Export',
+            title: 'Export File?',
             icon: 'question',
-            text: 'Do you want to export?',
+            text: 'Select month and year',
             input: 'month',
             inputValidator: value=>{
                 if (!value) {

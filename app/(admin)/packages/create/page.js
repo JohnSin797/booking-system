@@ -9,13 +9,11 @@ import axios from "@/app/lib/axios"
 import ProductCard from "@/app/components/cards/productCard"
 import { AiOutlineClose } from "react-icons/ai"
 import Swal from "sweetalert2"
-import { elements } from "chart.js"
 
-export default function Edit ({ params })
+export default function Create ()
 {
 
     const [packageForm, setPackageForm] = useState({
-        id: '',
         name: '',
         product_type: '',
         quantity: '',
@@ -57,46 +55,19 @@ export default function Edit ({ params })
         reader.readAsDataURL(file)
     }
 
-    function processPackage (data, prod) {
-        
-        const seenTypes = {}
-        const uniqueTypes = []
-        let productArr = []
-        let filtered = []
-        let list = []
-        prod.map((element,id)=>{
-            const type = element.product_type;
+    function processProduct (data) {
+        const seenTypes = {};
+        const uniqueTypes = [];
+
+        for (const item of data) {
+            const type = item.product_type;
             if (!seenTypes[type]) {
-                seenTypes[type] = true;
-                uniqueTypes.push(type);
+            seenTypes[type] = true;
+            uniqueTypes.push(type);
             }
-            if (type == data.product_type) {
-                list.push(element)
-            }
-        })
-        data.package_item.map((element,id)=>{
-            productArr.push(element.product_id)
-            filtered.push(element.product)
-            const indx = list.indexOf(element)
-            list.splice(indx, 1)
-        })
+        }
         setTypes(uniqueTypes)
-        setProducts(prod)
-        setProductList(list)
-        setFilteredProducts(filtered)
-        setPackageForm({
-            ...packageForm,
-            id: data.id,
-            name: data.name,
-            product_id: productArr,
-            product_type: data.product_type,
-            quantity: data.quantity,
-            total_price: data.total_price,
-            status: data.status,
-            image: data.image,
-            description: data.description,
-            capital: data.capital,
-        })
+        setProducts(data)
     }
 
     const handleProductType = e => {
@@ -153,10 +124,9 @@ export default function Edit ({ params })
         const getData = async () => {
             try {
                 await csrf()
-                await axios.post('/api/package/show', {id: params.slug})
+                await axios.get('/api/product/index')
                 .then(res=>{
-                    console.log(res)
-                    processPackage(res.data.data, res.data.products)
+                    processProduct(res.data.data)
                 })
                 .catch(err=>{
                     console.log(err)
@@ -171,7 +141,7 @@ export default function Edit ({ params })
     const submitPackageForm = async () => {
         try {
             await csrf()
-            await axios.post('/api/package/update', packageForm)
+            await axios.post('/api/package/store', packageForm)
             .then(res=>{
                 Swal.fire(res.data.message)
                 setPackageForm({
@@ -202,13 +172,13 @@ export default function Edit ({ params })
             <AdminNav />
             <main className="absolute w-full md:w-4/5 top-20 right-0 p-6">
                 <section className="flex justify-between items-center">
-                    <p className="text-3xl font-bold">Edit Package</p>
+                    <p className="text-3xl font-bold">Create new Package</p>
                     
                     <button 
                         className="w-full md:w-1/5 text-white p-1 bg-teal-400 hover:bg-teal-500"
                         onClick={submitPackageForm}
                     >
-                        update
+                        create
                     </button>
                 </section>
                 <section className="w-full border border-slate-900 rounded-lg p-6 mt-6">
@@ -263,7 +233,7 @@ export default function Edit ({ params })
                                     <div className="w-full flex justify-center items-center">
                                         <div className="w-full h-40 relative">
                                             <Image 
-                                                src={`data:image/jpg;image/jpeg;image/png;base64, ${packageForm.image}`}
+                                                src={packageImage}
                                                 alt="package_img"
                                                 layout="fill"
                                             />
@@ -337,7 +307,7 @@ export default function Edit ({ params })
                                             className="w-full outline-none text-gray-800 text-sm"
                                             name="total_price"
                                             onChange={handleForm}
-                                            value={Number(packageForm.total_price).toFixed(2)}
+                                            value={packageForm.total_price}
                                         />
                                     </div>
                                     <div className="w-full md:w-1/2 rounded-lg border border-gray-400 p-1 focus-within:text-indigo-400 focus-within:border-indigo-400">
@@ -363,7 +333,7 @@ export default function Edit ({ params })
                                             className="w-full outline-none text-gray-800 text-sm"
                                             name="capital"
                                             onChange={handleForm}
-                                            value={Number(packageForm.capital).toFixed(2)}
+                                            value={packageForm.capital}
                                         />
                                     </div>
                                     {/* <div className="w-full md:w-1/2 rounded-lg border border-gray-400 p-1 focus-within:text-indigo-400 focus-within:border-indigo-400">

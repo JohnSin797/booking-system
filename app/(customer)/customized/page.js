@@ -19,7 +19,7 @@ export default function Customized () {
     const [packageForm, setPackageForm] = useState({
         name: '',
         product_type: '',
-        quantity: '',
+        quantity: 1,
         total_price: 0,
         product_id: [],
         location: '',
@@ -74,6 +74,7 @@ export default function Customized () {
         let list = [...productList]
         let id = []
         let price = 0
+        const qty = packageForm.quantity
         const product = result[index]
         result.splice(index, 1)
         list.push(product)
@@ -86,7 +87,16 @@ export default function Customized () {
         setPackageForm({
             ...packageForm,
             product_id: id,
-            total_price: price
+            total_price: price * qty
+        })
+    }
+
+    const handleQuantity = e => {
+        const price = filteredProducts.reduce((acc,element)=>acc+element.price,0)
+        setPackageForm({
+            ...packageForm,
+            quantity: e.target.value,
+            total_price: price * e.target.value
         })
     }
 
@@ -95,6 +105,7 @@ export default function Customized () {
         let filtered = [...filteredProducts]
         let id = []
         let price = 0
+        const qty = packageForm.quantity
         const product = list[index]
         list.splice(index, 1)
         filtered.push(product)
@@ -107,7 +118,7 @@ export default function Customized () {
         setPackageForm({
             ...packageForm,
             product_id: id,
-            total_price: price
+            total_price: price * qty
         })
     }
 
@@ -267,7 +278,7 @@ export default function Customized () {
                                     type="number"
                                     className="w-full outline-none text-sm text-gray-700"
                                     name="quantity"
-                                    onChange={handleForm}
+                                    onChange={handleQuantity}
                                     value={packageForm.quantity}
                                     required
                                 />
@@ -290,8 +301,8 @@ export default function Customized () {
                             </button>
                         </div>
                         <div className="w-full md:w-1/3 space-y-2">
+                            <label className="text-xs font-bold">Product List</label>
                             <div className="w-full h-80 overflow-y-scroll">
-                                <label className="text-xs font-bold">Product List</label>
                                 <ul className="w-full">
                                     {
                                         productList.map((item,id)=>{
@@ -313,8 +324,8 @@ export default function Customized () {
                             </div>
                         </div>
                         <div className="w-full md:w-1/3 space-y-2">
+                            <label className="text-xs font-bold">Products</label>
                             <div className="w-full h-80 flex flex-wrap gap-8 overflow-y-scroll p-1">
-                                <label className="text-xs font-bold">Products</label>
                                 {
                                     filteredProducts.map((item,id)=>{
                                         return (

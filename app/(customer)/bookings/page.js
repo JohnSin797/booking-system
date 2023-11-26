@@ -11,6 +11,7 @@ import DateFrame from "@/app/components/dateFrame"
 import PackageRating from "@/app/components/packageRating"
 import StarRate from "@/app/components/starRate"
 import Link from "next/link"
+import DateTimeFrame from "@/app/components/datetimeFrame"
 
 export default function Bookings () {
 
@@ -82,9 +83,9 @@ export default function Bookings () {
                                                     <td className="font-bold text-blue-400 border border-slate-900 p-2">{item?.package?.name}</td>
                                                     <td className="border border-slate-900 p-2">
                                                         {
-                                                            item?.package?.package_item.map((pack)=>{
+                                                            item?.package?.package_item.map((pack,idx)=>{
                                                                 return (
-                                                                    <p>
+                                                                    <p key={idx}>
                                                                         <span className="text-gray-400">Product: </span>
                                                                         <span className="text-teal-400">{pack?.product?.name}</span>
                                                                     </p>
@@ -93,17 +94,17 @@ export default function Bookings () {
                                                         }
                                                     </td>
                                                     <td className="border border-slate-900 p-2">
-                                                        <p className="flex items-center text-cyan-400 gap-2">
+                                                        <p className="flex items-center text-cyan-400 gap-2 text-sm">
                                                             <span className="text-gray-400">Date Scheduled: </span>
-                                                            <DateFrame dateStr={item?.order_date} />
+                                                            <DateTimeFrame dateStr={item?.order_date} />
                                                         </p>
-                                                        <p className="flex items-center text-cyan-400 gap-2">
-                                                            <span className="text-gray-400">Message:</span>
-                                                            <span>{item?.message}</span>
-                                                        </p>
-                                                        <p className="flex items-center text-cyan-400 gap-2">
+                                                        <p className="flex items-center text-cyan-400 gap-2 text-sm">
                                                             <span className="text-gray-400">Location:</span>
                                                             <address>{item?.location}</address>
+                                                        </p>
+                                                        <p className="flex items-center text-cyan-400 gap-2 text-sm">
+                                                            <span className="text-gray-400">Message:</span>
+                                                            <span>{item?.message}</span>
                                                         </p>
                                                     </td>
                                                     <td className=" border border-slate-900 p-2">{item?.status?.toUpperCase()}</td>
