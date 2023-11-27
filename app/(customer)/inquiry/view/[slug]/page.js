@@ -13,7 +13,10 @@ import Link from "next/link"
 export default function View ({ params })
 {
 
-    const [inquiry, setInquiry] = useState({})
+    const [inquiry, setInquiry] = useState({
+        title: '',
+        message: ''
+    })
 
     useEffect(()=>{
         if (typeof(window) !== 'undefined' && localStorage) {

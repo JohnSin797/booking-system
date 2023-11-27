@@ -17,13 +17,13 @@ export default function Top () {
     }, [])
 
     return (
-        <nav className="fixed w-full top-0 p-6 px-40 bg-white flex justify-between items-center z-50">
+        <nav className="fixed w-full top-0 p-3 md:p-6 md:px-40 bg-white flex justify-between items-center z-50">
             <Link
                 href={'/'}
             >
                 <Logo />
             </Link>
-            <ul className="flex gap-10">
+            <ul className="flex justify-end gap-2 md:gap-10 text-sm md:text-base">
                 <li>
                     <Link
                         href={'/'}

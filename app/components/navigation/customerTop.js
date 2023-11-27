@@ -25,14 +25,14 @@ export default function CustomerTop () {
     }, [])
 
     return (
-        <div className="fixed top-0 right-0 w-4/5 bg-white z-50 p-6">
+        <div className="fixed top-0 right-0 w-full md:w-4/5 bg-white z-50 p-6">
             <div className="relative w-full flex justify-end">
                 <button
                     onClick={()=>setIsOpen(!isOpen)}
                 >
                     <AiFillCaretDown className="w-5 h-5" />
                 </button>
-                <div className={`${isOpen ? 'absolute w-[350px] h-40 rounded-lg bg-gray-900 top-10 text-white p-6 space-y-2' : 'hidden'}`}>
+                <div className={`${isOpen ? 'absolute w-full md:w-[350px] h-40 rounded-lg bg-gray-900 top-10 text-white p-6 space-y-2' : 'hidden'}`}>
                     <Link 
                         href={'/profile'}
                         className="block w-full p-2 border border-gray-400 hover:bg-gray-800 rounded-lg text-center"

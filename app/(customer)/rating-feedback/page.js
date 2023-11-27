@@ -46,7 +46,7 @@ export default function RatingFeedback () {
                 <div className="w-full bg-white z-10 top-16 sticky p-6">
                     <p className="text-3xl font-bold">Ratings and Feedbacks</p>
                 </div>
-                <div className="w-full mt-8 px-20 space-y-2">
+                <div className="w-full mt-8 md:px-20 space-y-2">
                     {
                         feedbacks.map((item,id)=>{
                             return <RatingFeedbackCard key={id} details={item?.package} getData={getData} />

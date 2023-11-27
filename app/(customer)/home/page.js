@@ -86,14 +86,14 @@ export default function Home () {
             <CustomerTop />
             <Side />
             <main className="absolute w-full md:w-4/5 top-24 right-0 p-6">
-                <section className="w-full flex gap-2 sticky top-16 bg-white p-6">
-                    <DashboardItem className={'w-[23%] border border-slate-900'} title={'pending'} details={bookingDetails.pending}>
+                <section className="w-full flex flex-col md:flex-row gap-2 md:sticky top-16 bg-white p-6">
+                    <DashboardItem className={'w-full md:w-[23%] border border-slate-900'} title={'pending'} details={bookingDetails.pending}>
                         <IoHourglassOutline className="w-20 h-20 text-white bg-teal-400" />
                     </DashboardItem>
-                    <DashboardItem className={'w-[23%] border border-slate-900'} title={'cancelled'} details={bookingDetails.cancelled}>
+                    <DashboardItem className={'w-full md:w-[23%] border border-slate-900'} title={'cancelled'} details={bookingDetails.cancelled}>
                         <TbShoppingCartCancel className="w-20 h-20 text-white bg-amber-400" />
                     </DashboardItem>
-                    <DashboardItem className={'w-[23%] border border-slate-900'} title={'confirmed'} details={bookingDetails.confirmed}>
+                    <DashboardItem className={'w-full md:w-[23%] border border-slate-900'} title={'confirmed'} details={bookingDetails.confirmed}>
                         <BsCheckSquare className="w-20 h-20 text-white bg-indigo-400" />
                     </DashboardItem>
                 </section>

@@ -11,7 +11,7 @@ export default function Logo () {
                 width={50}
                 height={30}
             />
-            <p className="font-bold">A&F Booking System</p>
+            <p className="font-bold text-xs md:text-base">A&F Booking System</p>
         </div>
     )
 }

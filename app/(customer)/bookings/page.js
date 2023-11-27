@@ -98,10 +98,10 @@ export default function Bookings () {
                                                             <span className="text-gray-400">Date Scheduled: </span>
                                                             <DateTimeFrame dateStr={item?.order_date} />
                                                         </p>
-                                                        <p className="flex items-center text-cyan-400 gap-2 text-sm">
+                                                        <div className="flex items-center text-cyan-400 gap-2 text-sm">
                                                             <span className="text-gray-400">Location:</span>
                                                             <address>{item?.location}</address>
-                                                        </p>
+                                                        </div>
                                                         <p className="flex items-center text-cyan-400 gap-2 text-sm">
                                                             <span className="text-gray-400">Message:</span>
                                                             <span>{item?.message}</span>

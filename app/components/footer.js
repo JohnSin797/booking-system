@@ -28,7 +28,7 @@ export default function Footer () {
     }, [])
 
     return (
-        <footer className="bg-slate-800 text-white p-6 px-20 space-y-6">
+        <footer className="bg-slate-800 text-white p-6 md:px-20 space-y-6">
             <section className="w-full flex justify-between">
                 <div className="w-1/2">
                     <Image 
@@ -39,17 +39,17 @@ export default function Footer () {
                     />
                     <p>We provide the best booking for the most affordable prices</p>
                 </div>
-                <div className="w-1/3 space-y-2">
-                    <p className="text-xl font-bold">Contact Us</p>
-                    <div>
+                <div className="w-1/3 space-y-2 text-sm md:text-md">
+                    <p className="md:text-xl font-bold">Contact Us</p>
+                    <div className="text-xs md:text-md">
                         <p>ADDRESS</p>
                         <address>{user?.address}</address>
                     </div>
-                    <div>
+                    <div className="text-xs md:text-md">
                         <p>PHONE NUMBER</p>
                         <p>{user?.contact_number}</p>
                     </div>
-                    <div>
+                    <div className="text-xs md:text-md">
                         <p>EMAIL</p>
                         <email>{user?.email}</email>
                     </div>

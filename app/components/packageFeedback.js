@@ -29,7 +29,7 @@ export default function PackageFeedback ({ packageId, getData }) {
             await axios.post('/api/package-feedback/store', {package_id: packageId, user_id: user.id, comment: comment})
             .then(res=>{
                 setComment('')
-                getData()
+                getData(user?.id)
                 Swal.fire(res.data.message)
             })
             .catch(err=>{
@@ -43,7 +43,7 @@ export default function PackageFeedback ({ packageId, getData }) {
 
     return (
         <form className='md:px-10' onSubmit={submitFeedback}>
-            <div className='flex justify-between items-center gap-2 p-6'>
+            <div className='flex justify-between items-center gap-2 md:p-6'>
                 <input 
                     type='text'
                     className='w-full p-2 rounded-full border border-slate-900'

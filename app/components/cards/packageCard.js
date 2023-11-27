@@ -9,10 +9,12 @@ import { useRouter } from "next/navigation"
 import Swal from "sweetalert2"
 import { AiOutlineClose } from "react-icons/ai"
 import AverageStarRating from "../averageStarRating"
+import ViewPackage from "../modals/views/viewPackage"
 
 export default function PackageCard ({ source, name, price, packageItem }) {
 
     const [user,setUser] = useState({})
+    const [openPackage, setOpenPackage] = useState(false)
     const router = useRouter()
     const [openConfirmation, setOpenConfirmation] = useState(false)
     const [bookingForm, setBookingForm] = useState({
@@ -107,6 +109,7 @@ export default function PackageCard ({ source, name, price, packageItem }) {
 
     return (
         <div className='w-full md:w-[23%] bg-slate-900 h-80 border-slate-900 border'>
+            <ViewPackage status={openPackage} setStatus={setOpenPackage} details={packageItem} />
             <div className={`${openConfirmation ? 'fixed w-full h-full bg-slate-900/90 top-0 left-0 z-50 flex justify-center items-center' : 'hidden'}`}>
                 <div className="w-full md:w-3/5 bg-white rounded-lg p-6 relative">
                     <button
@@ -195,7 +198,7 @@ export default function PackageCard ({ source, name, price, packageItem }) {
                     </div>
                 </div>
             </div>
-            <div className='w-full h-60 relative'>
+            <div className='w-full h-60 relative hover:ring-4 cursor-pointer ring-indigo-400' onClick={()=>setOpenPackage(true)}>
                 <Image 
                     src={`data:image/jpg;image/jpeg;image/png;base64, ${source}`}
                     alt="package-img"

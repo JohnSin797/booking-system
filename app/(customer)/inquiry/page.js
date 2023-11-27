@@ -102,8 +102,8 @@ export default function Inquiry ()
                             </div>
                         </div>
                         :
-                        <div className="w-full h-96 overflow-y-scroll">
-                            <table className="w-full table-fixed">
+                        <div className="w-full h-96 overflow-scroll md:overflow-y-scroll">
+                            <table className="w-full table-auto md:table-fixed">
                                 <thead className="sticky top-0 w-full bg-white">
                                     <tr>
                                         <th>About</th>
@@ -122,11 +122,12 @@ export default function Inquiry ()
                                                     <td className="text-white border border-slate-900 p-2">
                                                         {
                                                             item?.inquiry_reply ? 
-                                                            <button
-                                                                className="w-full p-1 rounded-lg bg-blue-400 hover:bg-blue-500"
+                                                            <Link
+                                                                href={'/inquiry/reply/'+item?.inquiry_reply?.id}
+                                                                className="block text-center w-full p-1 rounded-lg bg-blue-400 hover:bg-blue-500"
                                                             >
                                                                 read
-                                                            </button>
+                                                            </Link>
                                                             :
                                                             <span className="text-gray-400">No reply</span>
                                                         }

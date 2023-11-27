@@ -65,8 +65,8 @@ export default function Home() {
         </div>
       </section>
       <section className='mt-20 w-full'>
-        <p className='text-center text-3xl font-bold'>Rating and Feedback</p>
-        <p className='text-center'>Check out what our customers have to say:</p>
+        <p className='text-center text-xl md:text-3xl font-bold'>Rating and Feedback</p>
+        <p className='text-center text-sm md:text-md'>Check out what our customers have to say:</p>
         <div className='mt-10'>
           <StarRating />
           <Feedback getData={getData} />

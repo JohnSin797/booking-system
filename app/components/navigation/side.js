@@ -18,11 +18,11 @@ export default function Side () {
         <>
             <button
                 onClick={()=>setIsOpen(!isOpen)}
-                className="absolute top-6 right-6 md:hidden"
+                className="fixed top-6 left-6 md:hidden z-50"
             >
                 <AiOutlineMenuUnfold className="w-5 h-5" />
             </button>
-            <aside className={`fixed flex flex-col justify-between md:justify-start left-0 h-full w-full md:w-1/5 bg-gray-900 duration-300 text-gray-300 ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
+            <aside className={`fixed z-50 flex flex-col justify-between md:justify-start left-0 h-full w-full md:w-1/5 bg-gray-900 duration-300 text-gray-300 ${isOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
                 <div className="border-b border-gray-600 p-10">
                     <div className="bg-gray-800 p-3 rounded-lg">
                         <Logo />

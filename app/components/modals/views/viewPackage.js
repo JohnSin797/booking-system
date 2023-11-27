@@ -12,13 +12,15 @@ export default function ViewPackage ({ status, setStatus, details }) {
             className={`${status ? 'fixed w-full h-full top-0 right-0 bg-slate-900/90 flex justify-center items-center z-50' : 'hidden'}`}
         >
             <div className="bg-white rounded-lg p-6 w-full md:w-2/3 relative">
-                <button
-                    onClick={()=>setStatus(false)}
-                    className="absolute right-3 top-3 hover:text-red-600"
-                >
-                    <AiOutlineClose className="w-5 h-5" />
-                </button>
-                <p className="text-xl font-bold">Add new Package</p>
+                <div className="flex justify-between items-center">
+                    <p className="text-xl font-bold">View Package</p>
+                    <button
+                        onClick={()=>setStatus(false)}
+                        className="hover:text-red-600"
+                    >
+                        <AiOutlineClose className="w-5 h-5" />
+                    </button>
+                </div>
                 <div className="w-full flex gap-2 mt-10">
                     <div className="w-full md:w-1/2 space-y-2">
                         <div className="w-full rounded-lg border border-gray-400 p-1 focus-within:text-indigo-400 focus-within:border-indigo-400">
@@ -85,7 +87,7 @@ export default function ViewPackage ({ status, setStatus, details }) {
                     </div>
                     <div className="w-full md:w-1/2 space-y-2">
                         <div className="w-full h-40 border border-gray-400 p-2 rounded-lg">
-                            <label lassName="text-xs font-bold w-full h-full">
+                            <label className="text-xs font-bold w-full h-full">
                                 Image
                                 <div className="w-full flex justify-center items-center">
                                     <div className="border md:w-3/5 md:h-28 relative">
