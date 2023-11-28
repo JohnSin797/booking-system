@@ -69,7 +69,9 @@ export default function Home() {
         <p className='text-center text-sm md:text-md'>Check out what our customers have to say:</p>
         <div className='mt-10'>
           <StarRating />
-          <Feedback getData={getData} />
+          <div className='w-full sticky top-0'>
+            <Feedback getData={getData} />
+          </div>
           <div className='w-full p-6 md:p-20 space-y-4'>
             {
               feedbacks.map((item,id)=>{

@@ -8,8 +8,12 @@ export default function StarRate ({ star }) {
 
     useEffect(()=>{
         function setArray(){
-            const newArr = new Array(star).fill(null)
-            setStarArray(newArr)
+            if (star) {
+                const newArr = new Array(star).fill(null)
+                setStarArray(newArr)
+            } else {
+                setStarArray([])
+            }
         }
         setArray()
     }, [])

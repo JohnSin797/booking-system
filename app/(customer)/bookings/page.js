@@ -12,6 +12,7 @@ import PackageRating from "@/app/components/packageRating"
 import StarRate from "@/app/components/starRate"
 import Link from "next/link"
 import DateTimeFrame from "@/app/components/datetimeFrame"
+import Image from "next/image"
 
 export default function Bookings () {
 
@@ -68,6 +69,7 @@ export default function Bookings () {
                                 <thead>
                                     <tr>
                                         <th>Package</th>
+                                        <th>Image</th>
                                         <th>Product Details</th>
                                         <th>Scheduled</th>
                                         <th>Status</th>
@@ -81,7 +83,16 @@ export default function Bookings () {
                                             return (
                                                 <tr key={id} className="border border-slate-900">
                                                     <td className="font-bold text-blue-400 border border-slate-900 p-2">{item?.package?.name}</td>
-                                                    <td className="border border-slate-900 p-2">
+                                                    <td className="p-2 border border-slate-900">
+                                                        <Image 
+                                                            src={`data:image/jpg;image/jpeg;image/png;base64, ${item?.package?.image}`}
+                                                            alt="package-img"
+                                                            width={400}
+                                                            height={60}
+                                                            layout="responsive"
+                                                        />
+                                                    </td>
+                                                    <td className="w-[200px] border border-slate-900 p-2">
                                                         {
                                                             item?.package?.package_item.map((pack,idx)=>{
                                                                 return (

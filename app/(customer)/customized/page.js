@@ -25,7 +25,8 @@ export default function Customized () {
         location: '',
         schedule: '',
         message: '',
-        user_id: ''
+        user_id: '',
+        services: ''
     })
     const [openBookingModal, setOpenBookingModal] = useState(false)
 
@@ -47,11 +48,8 @@ export default function Customized () {
         setProductList(result)
         setPackageForm({
             ...packageForm,
-            product_id: [],
             product_type: e.target.value,
-            total_price: 0
         })
-        setFilteredProducts([])
     }
 
     function processProduct (data) {
@@ -137,13 +135,13 @@ export default function Customized () {
                 console.log(error)
             }
         }
-        getData()
         if (typeof(window) !== 'undefined' && localStorage) {
             const token = localStorage.getItem('user_token')
             const decoded = jwt.decode(token, {complete: true})
+            getData()
             setPackageForm({
                 ...packageForm,
-                user_id: decoded?.payload?.id
+                user_id: decoded.payload.id,
             })
         }
     }, [])
@@ -155,18 +153,17 @@ export default function Customized () {
             await axios.post('/api/booking/customize', packageForm)
             .then(res=>{
                 console.log(res)
-                const token = localStorage.getItem('user_token')
-                const decoded = jwt.decode(token, {complete: true})
                 setPackageForm({
+                    ...packageForm,
                     name: '',
                     product_type: '',
-                    quantity: '',
+                    quantity: 1,
                     total_price: 0,
                     product_id: [],
                     location: '',
                     schedule: '',
                     message: '',
-                    user_id: decoded.payload.id
+                    services: '',
                 })
                 setProductList([])
                 setFilteredProducts([])
@@ -207,13 +204,28 @@ export default function Customized () {
                                 <div className="w-full border border-gray-400 focus-within:border-indigo-400 focus-within:text-indigo-400 rounded-lg p-1">
                                     <label className="block w-full text-xs font-bold">Schedule</label>
                                     <input 
-                                        type="date"
+                                        type="datetime-local"
                                         className="w-full outline-none text-sm text-gray-700"
                                         name="schedule"
                                         onChange={handleForm}
                                         value={packageForm.schedule}
                                         required
                                     />
+                                </div>
+                                <div className="w-full rounded-lg border border-gray-400 p-1 focus-within:text-indigo-400 focus-within:border-indigo-400">
+                                    <label htmlFor="services" className="text-xs font-bold w-full block">Service</label>
+                                    <select 
+                                        id="services"
+                                        className="w-full outline-none text-gray-800 text-sm"
+                                        name="services"
+                                        onChange={handleForm}
+                                        value={packageForm.services}
+                                        required
+                                    >
+                                        <option>Select Service</option>
+                                        <option value={'home surprise'}>Home Surprise</option>
+                                        <option value={'car surprise'}>Car Surprise</option>
+                                    </select>
                                 </div>
                                 <div className="w-full border border-gray-400 focus-within:border-indigo-400 focus-within:text-indigo-400 rounded-lg p-1">
                                     <label className="block w-full text-xs font-bold">Message</label>

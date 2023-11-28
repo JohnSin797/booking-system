@@ -39,7 +39,7 @@ export default function RatingFeedbackCard ({ details, getData }) {
                         layout="fill"
                     />
                 </div>
-                <div className="w-full md:w-1/2 h-full pt-6 md:p-6 text-xs md:text-md">
+                <div className="w-full md:w-1/2 h-full pt-6 md:p-6 text-xs md:text-base md:space-y-3">
                     <p className="flex gap-2"><span className="text-gray-400">Rating: {averageStar ? averageStar : 0}</span><AverageStarRating star={averageStar} /></p>
                     <p className="text-gray-400">Package Name: <span className="text-blue-400">{details?.name}</span></p>
                     <p className="text-gray-400">Product Type: <span className="text-blue-400">{details?.product_type}</span></p>
@@ -49,7 +49,9 @@ export default function RatingFeedbackCard ({ details, getData }) {
             </div>
             <button onClick={()=>setSeeMore(!seeMore)} className="underline text-teal-400">see feedbacks</button>
             <div className={`${seeMore ? 'w-full space-y-2 max-h-96 overflow-y-scroll' : 'hidden'}`}>
-                <PackageFeedback packageId={details.id} getData={getData} />
+                <div className="w-full sticky top-0 bg-white">
+                    <PackageFeedback packageId={details.id} getData={getData} />
+                </div>
                 {
                     details?.package_feedbacks?.map((element,id)=>{
                         return (

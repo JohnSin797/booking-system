@@ -71,13 +71,14 @@ export default function FeedbackInput ({ item, getData }) {
                     >
                         <BiSolidPaperPlane className='w-6 h-6 text-white' />
                     </button>
+                    
                 </div>
                 <p className={`${item?.replies?.length > 0 ? 'text-sm text-blue-600' : 'hidden'}`}>Replies:</p>
                 {
                     item?.replies.map((rep,id)=>{
                         return (
                             <div key={id} className="border border-slate-900 p-2 space-y-2">
-                                <p className="font-bold flex gap-2 items-center"><span>{rep?.user?.name}</span> <StarRate star={rep?.user?.rating.stars} /></p>
+                                <p className="font-bold flex gap-2 items-center"><span>{rep?.user?.name}</span> <StarRate star={rep?.user?.rating?.stars} /></p>
                                 <p>{rep?.comment}</p>
                                 <p className="text-xs text-cyan-400 font-bold"><DateFrame dateStr={rep?.created_at} /></p>
                             </div>

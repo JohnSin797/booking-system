@@ -6,6 +6,7 @@ import AdminNav from "@/app/components/navigation/adminNav";
 import AdminTopNav from "@/app/components/navigation/adminTopNav";
 import { csrf } from "@/app/hooks/csrf";
 import axios from "@/app/lib/axios";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { TbFidgetSpinner } from "react-icons/tb";
 import Swal from "sweetalert2";
@@ -118,11 +119,12 @@ export default function Booking () {
                             </div>
                         </div>
                         :
-                        <div className="w-full h-96 overflow-y-scroll">
+                        <div className="w-full h-96 overflow-scroll">
                             <table className="w-full table-auto">
                                 <thead>
                                     <tr>
                                         <th>Package Name</th>
+                                        <th>Image</th>
                                         <th>Package Type</th>
                                         <th>Product Details</th>
                                         <th>Customer</th>
@@ -137,13 +139,22 @@ export default function Booking () {
                                             return (
                                                 <tr key={id} className="">
                                                     <td className="p-2 text-blue-400 font-bold border border-slate-900">{item?.package?.name}</td>
+                                                    <td className="p-2 border border-slate-900">
+                                                        <Image 
+                                                            src={`data:image/jpg;image/jpeg;image/png;base64, ${item?.package?.image}`}
+                                                            alt="package-img"
+                                                            width={400}
+                                                            height={60}
+                                                            layout="responsive"
+                                                        />
+                                                    </td>
                                                     <td className="p-2 border border-slate-900">{item?.package?.package_type}</td>
                                                     <td className="p-2 border border-slate-900">
                                                         {
                                                             item?.package?.package_item?.map((element,idx)=>{
                                                                 return (
                                                                     <p key={idx} className="flex gap-2">
-                                                                        <span className="text-gray-400 text-sm">Product Name:</span>
+                                                                        <span className="text-gray-400 text-sm">Product:</span>
                                                                         <span className="text-cyan-400 text-sm">{element?.product?.name}</span>
                                                                     </p>
                                                                 )
@@ -159,6 +170,10 @@ export default function Booking () {
                                                         <p className="flex gap-2">
                                                             <span className="text-gray-400 text-sm">Location:</span>
                                                             <span className="text-sm text-teal-400">{item?.location}</span>
+                                                        </p>
+                                                        <p className="flex gap-2">
+                                                            <span className="text-gray-400 text-sm">Service:</span>
+                                                            <span className="text-sm text-teal-400">{item?.services}</span>
                                                         </p>
                                                         <p className="flex gap-2">
                                                             <span className="text-gray-400 text-sm">Message:</span>
