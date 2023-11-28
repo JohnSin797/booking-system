@@ -49,7 +49,7 @@ export default function Home() {
       <Top />
       <section className='mt-24 w-full px-10 py-6'>
         <div className='w-full h-96 banner relative'>
-          <Link href={'/auth/login'} className='block bg-green-400 p-2 text-white absolute bg-green-600 hover:bg-green-500 right-20 top-40'>BOOK NOW</Link>
+          <Link href={'/auth/login'} className='block bg-[#f07654] p-3 rounded text-white absolute hover:bg-[#f25e35] right-20 top-40'>BOOK NOW</Link>
         </div>
       </section>
       <section className='mt-20 w-full p-6 space-y-10'>

@@ -107,7 +107,7 @@ export default function Dashboard () {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
           {
-            label: 'Income',
+            label: 'Sales',
             data: incomeDetails,
             borderColor: 'blue',
             backgroundColor: 'rgba(0, 0, 255, 1)',
