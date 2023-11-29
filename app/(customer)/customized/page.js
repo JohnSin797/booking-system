@@ -300,7 +300,7 @@ export default function Customized () {
                                 <input 
                                     type="number"
                                     className="w-full outline-none text-sm text-white bg-indigo-400"
-                                    value={Number(packageForm.total_price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                    value={Number(packageForm.total_price).toFixed(2)}
                                     readOnly
                                 />
                             </div>
