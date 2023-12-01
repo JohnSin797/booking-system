@@ -39,6 +39,13 @@ export default function Top () {
                     </Link>
                 </li>
                 <li>
+                    <Link
+                        href={'/about'}
+                    >
+                        About
+                    </Link>
+                </li>
+                <li>
                     {
                         !user && (
                             <Link

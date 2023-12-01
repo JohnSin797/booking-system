@@ -5,6 +5,7 @@ import { AiOutlineMenuUnfold, AiOutlineCloseCircle, AiFillBook, AiOutlineDropbox
 import { LuLayoutDashboard } from "react-icons/lu"
 import { TbPackages, TbReportAnalytics } from "react-icons/tb"
 import { FaQuestionCircle } from "react-icons/fa";
+import { IoInformationCircle } from "react-icons/io5";
 import Logo from "../logo"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -91,6 +92,15 @@ export default function AdminNav () {
                         >
                             <TbReportAnalytics className={`w-5 h-5 ${currentPath.startsWith('/reports') ? 'text-indigo-400' : 'text-gray-400'}`} />
                             Reports
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={'/about-page'}
+                            className={`block w-full p-2 rounded-lg hover:bg-gray-800 flex items-center gap-2 ${currentPath.startsWith('/about-page') ? 'font-bold text-white bg-slate-800' : ''}`}
+                        >
+                            <IoInformationCircle className={`w-5 h-5 ${currentPath.startsWith('/about-page') ? 'text-indigo-400' : 'text-gray-400'}`} />
+                            About
                         </Link>
                     </li>
                 </ul>
