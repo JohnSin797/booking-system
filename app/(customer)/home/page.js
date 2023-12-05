@@ -10,9 +10,11 @@ import DashboardItem from "@/app/components/cards/dashboardItem"
 import { BsCheckSquare, BsFillPersonFill } from "react-icons/bs"
 import { IoHourglassOutline } from "react-icons/io5"
 import { TbShoppingCartCancel } from "react-icons/tb"
+import { HiMagnifyingGlass } from "react-icons/hi2"
 import Feedback from "@/app/components/feedback"
 import FeedbackInput from "@/app/components/feedbackInput"
 import Product from "@/app/components/cards/product"
+import Swal from "sweetalert2"
 
 export default function Home () {
 
@@ -23,6 +25,7 @@ export default function Home () {
         cancelled: 0,
         pending: 0
     })
+    const [keyword, setKeyword] = useState('')
 
     function processBookingDetails(arr) {
         let details = {
@@ -99,12 +102,38 @@ export default function Home () {
         }
     }, [])
 
+    const searchProduct = async (e) => {
+        try {
+            e.preventDefault()
+            await csrf()
+            await axios.post('/api/product/search', {keyword: keyword})
+            .then(res=>{
+                setProducts(res.data.data)
+            })
+            .catch(err=>{
+                console.log(err)
+                Swal.fire(err.response.data.message)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <>
             <CustomerTop />
             <Side />
             <main className="absolute w-full md:w-4/5 top-24 right-0 p-6">
-                <section className="w-full flex flex-col md:flex-row gap-2 md:sticky top-16 bg-white p-6 z-10">
+                <section className="w-full flex flex-col md:flex-row gap-2 items-center md:sticky top-16 bg-white p-6 z-10">
+                    <form onSubmit={searchProduct} className="w-full flex border border-slate-900 gap-2 items-center rounded-lg p-1">
+                        <HiMagnifyingGlass className="border-slate-900 w-8 h-8" />
+                        <input
+                            type="text"
+                            className="rounded-lg p-2 outline-none"
+                            onChange={e=>setKeyword(e.target.value)}
+                            placeholder="Search Products"
+                        />
+                    </form>
                     <DashboardItem className={'w-full md:w-[23%] border border-slate-900'} title={'pending'} details={bookingDetails.pending}>
                         <IoHourglassOutline className="w-20 h-20 text-white bg-teal-400" />
                     </DashboardItem>
