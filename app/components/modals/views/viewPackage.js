@@ -106,9 +106,16 @@ export default function ViewPackage ({ status, setStatus, details }) {
                                 {
                                     details?.package_item?.map((item,idx)=>{
                                         return (
-                                            <div key={idx} className="relative w-20 h-20 rounded-lg">
-                                                <ProductCard product={item?.product} />
-                                                <p className="absolute -bottom-5">{item?.product?.name}</p>
+                                            <div className="w-20">
+                                                <div key={idx} className="relative w-20 h-20 rounded-lg">
+                                                    <Image 
+                                                        src={`data:image/jpg;image/jpeg;image/png;base64, ${item?.product?.image}`}
+                                                        alt="product-img"
+                                                        layout="fill"
+                                                    />
+                                                    {/* <ProductCard product={item?.product} /> */}
+                                                </div>
+                                                <p className="text-xs font-bold">{item?.product?.name} asd asd ajgjgjd asd</p>
                                             </div>
                                         )
                                     })

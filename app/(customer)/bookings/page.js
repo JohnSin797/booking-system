@@ -103,6 +103,10 @@ export default function Bookings () {
                                                                 )
                                                             })
                                                         }
+                                                        <p className="space-x-2">
+                                                            <span className="text-gray-400 text-sm">Total Price:</span>
+                                                            <span className="text-cyan-400 text-sm">{item?.package?.total_price}</span>
+                                                        </p>
                                                     </td>
                                                     <td className="border border-slate-900 p-2">
                                                         <p className="flex items-center text-cyan-400 gap-2 text-sm">

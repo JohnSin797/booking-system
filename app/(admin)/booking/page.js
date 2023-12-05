@@ -160,6 +160,10 @@ export default function Booking () {
                                                                 )
                                                             })
                                                         }
+                                                        <p className="space-x-2">
+                                                            <span className="text-gray-400 text-sm">Total Price:</span>
+                                                            <span className="text-cyan-400 text-sm">{item?.package?.total_price}</span>
+                                                        </p>
                                                     </td>
                                                     <td className="p-2 border border-slate-900">{item?.user?.name}</td>
                                                     <td className="p-2 border border-slate-900">
