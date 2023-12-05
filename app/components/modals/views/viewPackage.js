@@ -106,8 +106,8 @@ export default function ViewPackage ({ status, setStatus, details }) {
                                 {
                                     details?.package_item?.map((item,idx)=>{
                                         return (
-                                            <div className="w-20">
-                                                <div key={idx} className="relative w-20 h-20 rounded-lg">
+                                            <div key={idx} className="w-20">
+                                                <div className="relative w-20 h-20 rounded-lg">
                                                     <Image 
                                                         src={`data:image/jpg;image/jpeg;image/png;base64, ${item?.product?.image}`}
                                                         alt="product-img"
