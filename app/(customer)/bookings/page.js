@@ -13,12 +13,21 @@ import StarRate from "@/app/components/starRate"
 import Link from "next/link"
 import DateTimeFrame from "@/app/components/datetimeFrame"
 import Image from "next/image"
+import ViewBooking from "@/app/components/modals/views/viewBooking"
 
 export default function Bookings () {
 
     const [bookings, setBookings] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [openView, setOpenView] = useState(false)
     const [user, setUser] = useState({})
+    const [viewDetails, setViewDetails] = useState({
+        order_date: '',
+        location: '',
+        quantity: 0,
+        services: '',
+        message: ''
+    })
 
     useEffect(()=>{
         if (typeof(window) !== 'undefined' && localStorage) {
@@ -48,11 +57,17 @@ export default function Bookings () {
         }
     }, [])
 
+    const viewBooking = view => {
+        setViewDetails(view)
+        setOpenView(true)
+    }
+
     return (
         <>
             <CustomerTop />
             <Side />
             <main className="absolute w-full md:w-4/5 top-24 right-0 p-6">
+                <ViewBooking status={openView} setStatus={setOpenView} details={viewDetails} />
                 <p className="text-3xl font-bold">Booking</p>
                 <section className="w-full border border-slate-900 rounded-lg shadow-md p-6 mt-8">
                     <div className=""></div>
@@ -128,6 +143,7 @@ export default function Bookings () {
                                                     </td>
                                                     <td className=" border border-slate-900 p-2 space-y-2">
                                                         <button
+                                                            onClick={()=>viewBooking(item)}
                                                             className="w-full p-2 rounded-lg bg-teal-400 text-white"
                                                         >
                                                             view

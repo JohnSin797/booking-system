@@ -115,7 +115,7 @@ export default function ViewPackage ({ status, setStatus, details }) {
                                                     />
                                                     {/* <ProductCard product={item?.product} /> */}
                                                 </div>
-                                                <p className="text-xs font-bold">{item?.product?.name} asd asd ajgjgjd asd</p>
+                                                <p className="text-xs font-bold">{item?.product?.name}</p>
                                             </div>
                                         )
                                     })

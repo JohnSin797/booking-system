@@ -101,6 +101,8 @@ export default function Exports ()
             ]
         })
         tableRows.push(header)
+        // const totalPrice = arr.reduce((acc,element)=>acc+element?.package?.total_price,0) ?? 0
+        let totalPrice = 0
         arr.forEach(element => {
             const profit = parseFloat(element?.package?.total_price) - parseFloat(element?.package?.capital)
             const row = new TableRow({
@@ -151,9 +153,14 @@ export default function Exports ()
                     })
                 ]
             })  
-            tableRows.push(row)
+            if (new Date(element?.order_date).getFullYear() == new Date(reportDate).getFullYear() && 
+                new Date(element?.order_date).getMonth() == new Date(reportDate).getMonth()
+            ) {
+                console.log(new Date(element?.order_date).getMonth(), new Date(reportDate).getMonth())
+                tableRows.push(row)
+                totalPrice += element?.package?.total_price
+            }
         })
-        const totalPrice = arr.reduce((acc,element)=>acc+element?.package?.total_price,0) ?? 0
         const inputDate = new Date(reportDate)
         const firstDay = new Date(inputDate.getFullYear(), inputDate.getMonth(), 1)
         const lastDay = new Date(inputDate.getFullYear(), inputDate.getMonth() + 1, 0)
