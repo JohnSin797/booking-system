@@ -74,6 +74,13 @@ export default function PackageFeedbackInput ({ item, getData }) {
                 </div>
                 <p className={`${item?.replies?.length > 0 ? 'text-sm text-blue-600' : 'hidden'}`}>Replies:</p>
                 {
+                    item?.package_feedback_reply?.sort(function (a,b) {
+                        const datA = new Date(a.created_at)
+                        const datB = new Date(b.created_at)
+                        return datB - datA
+                    })
+                }
+                {
                     item?.package_feedback_reply?.map((rep,id)=>{
                         return (
                             <div key={id} className="border border-slate-900 p-2 space-y-2">

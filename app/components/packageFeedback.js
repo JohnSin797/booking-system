@@ -34,7 +34,7 @@ export default function PackageFeedback ({ packageId, getData }) {
             })
             .catch(err=>{
                 console.log(err)
-                // router.push('/auth/login')
+                Swal.fire(err.response.data.message)
             })
         } catch (error) {
             console.log(error)

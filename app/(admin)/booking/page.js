@@ -180,6 +180,10 @@ export default function Booking () {
                                                             <span className="text-sm text-teal-400">{item?.services}</span>
                                                         </p>
                                                         <p className="flex gap-2">
+                                                            <span className="text-gray-400 text-sm">Contact #:</span>
+                                                            <span className="text-sm text-teal-400">{item?.user?.contact_number}</span>
+                                                        </p>
+                                                        <p className="flex gap-2">
                                                             <span className="text-gray-400 text-sm">Message:</span>
                                                             <span className="text-sm text-teal-400">{item?.message}</span>
                                                         </p>

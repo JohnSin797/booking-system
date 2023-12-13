@@ -25,7 +25,7 @@ export default function RatingFeedback () {
     const getData = async (id) => {
         try {
             await csrf()
-            await axios.post('/api/booking/show', {user_id: id})
+            await axios.post('/api/package-feedback-reply/show', {user_id: id})
             .then(res=>{
                 console.log(res)
                 setFeedbacks(res.data.data)
@@ -49,7 +49,7 @@ export default function RatingFeedback () {
                 <div className="w-full mt-8 md:px-20 space-y-2">
                     {
                         feedbacks.map((item,id)=>{
-                            return <RatingFeedbackCard key={id} details={item?.package} getData={getData} />
+                            return <RatingFeedbackCard key={id} details={item} getData={getData} />
                         })
                     }
                 </div>
